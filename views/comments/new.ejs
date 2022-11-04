@@ -1,0 +1,45 @@
+<%- include ("../partials/header.ejs")%>
+<style>
+    /* .form-control{
+        
+    } */
+    
+    .mid{
+       
+       width:45%;
+        margin: 20px auto;
+    }
+    .sub{
+        width:100%;
+    }
+   
+</style>
+<div class ="container-fluid">
+  
+   <div class= "row">
+        <h1 style= "text-align: center">Add New Comment to <%=campground.name%></h1>
+        <div class = "mid">
+            <form action= "/campgrounds/<%=campground._id%>/comments" method ="POST">
+                <div class="mb-3">
+                    <label for="text" class="form-label" >comment</label>
+                    <textarea  placeholder= "" name="comment[text]" type="text" class="form-control" id="text"></textarea>
+                </div>
+            
+               
+                <button type="submit" class="btn btn-primary sub">Post</button>
+            </form>
+            <p>
+            <a class="" href = /campgrounds>View all Campgrounds</a>
+            </p>
+        </div>
+   </div>
+   
+
+
+
+
+
+</div><!--container-->
+
+
+<%- include ("../partials/footer.ejs")%>

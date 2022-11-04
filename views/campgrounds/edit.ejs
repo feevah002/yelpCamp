@@ -1,0 +1,51 @@
+<%- include ("../partials/header.ejs")%>
+<style>
+    /* .form-control{
+        
+    } */
+    
+    .mid{
+       
+       width:45%;
+        margin: 20px auto;
+    }
+    .sub{
+        width:100%;
+    }
+   
+</style>
+<div class ="container-fluid">
+
+   <div class= "row">
+        <h1 style= "text-align: center">Create a New Campground</h1>
+        <div class = "mid">
+            <form action= "/campgrounds/<%=campground._id%>?_method=PUT" method ="POST">
+                <div class="mb-3">
+                    <label for="name" class="form-label" >Name</label>
+                    <input  value=<%=campground.name%> name="campground[name]" type="text" class="form-control" id="name">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image URL</label>
+                    <input value=<%=campground.image%> name="campground[image]" type="text" class="form-control" id="image">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <input type ="textarea"  value=<%=campground.description%> name="campground[description]" class="form-control" id="description">
+                </div>
+                <button type="submit" class="btn btn-primary sub">Submit</button>
+            </form>
+            <p>
+            <a class="" href = "/campgrounds/<%=campground._id%>">Go Back</a>
+            </p>
+        </div>
+   </div>
+   
+
+
+
+
+
+</div><!--container-->
+
+
+<%- include ("../partials/footer.ejs")%>

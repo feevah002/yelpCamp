@@ -1,0 +1,104 @@
+<%- include ("../partials/header.ejs") %>
+
+<!--<h1>This is the show template</h1>-->
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-3">
+            <p class="lead">yelpcamp</p>
+            <ul class="list-group">
+                <li class=" active list-group-item ">info 1</li>
+                <li class="list-group-item">info 2</li>
+                <li class="list-group-item">info 3</li>
+            </ul>
+            map
+        </div>
+        <div class="col-sm-9">
+            <div class="card">
+               <style>
+                    .card-title{
+                        text-transform: capitalize;
+                    }
+               </style>
+                <img class= "card-img-top img-responsive" src="<%= campground.image %>">
+                <div class="card-body">
+                    <div class="d-flex">
+                        
+                        <h4 class="card-title"><a href="#"></a><%=campground.name%>
+                        </a></h4>
+                         <h4 class="ms-auto">$<%=campground.price%>/night</h4>
+                       
+                    </div>
+                <div>
+                </div>   
+
+                        <p><%=campground.description%></p>
+                        <em>Submitted by: 
+                            <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                                you
+                            <% } else { %>
+                                <%=campground.author.user%>
+                            <%}%>
+                        </em>
+                        <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                            <p></p>
+                            <div>
+                                <a class='btn btn-warning btn-sm'href="/campgrounds/<%= campground._id%>/edit">Edit</a>
+                            
+                                <form class="deletebtn" action= "/campgrounds/<%=campground._id%>?_method=DELETE"method="POST">
+                                    <button class="btn btn-danger btn-sm " >delete</button>
+                                </form>
+                                
+                            </div>
+                        <% } %>
+                      
+                </div>
+             
+                
+            </div> <!--card-->
+            <div class=" card bg-light ">
+                <div class="card-body">
+                    <div class="d-flex" >
+                    <div class="ms-auto">
+                        <p><a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Leave a review</a></p>
+                    </div>
+                    <hr>
+                    </div>
+                     
+                 <div>
+                    <div class="row">
+                    <% campground.comments.forEach(comment =>{ %>
+                        <hr>
+                        <p class="col-sm-12">
+                           <div class=" d-flex">
+                                <div class="me auto"><strong><%=comment.author.username%></strong> </div> 
+                               <div class="ms-auto">10 days ago <%=new Date()%></div>
+                           </div>
+                            <span>
+                                <div><%= comment.text%></div>
+                                <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                    <div>
+                                    <a class= "btn btn-warning btn-sm"href="/campgrounds/<%= campground._id %>/comments/<%=comment.id%>/edit">Edit</a>
+                                    
+                                        <form class= "deletebtn" action="/campgrounds/<%= campground._id %>/comments/<%=comment.id%>?_method=DELETE" method="POST">
+                                          
+                                            <button class="btn btn-danger btn-sm">delete</button>
+                                        </form>
+                                        <!-- <i class="bi bi-trash"></i> -->
+                                    </div>
+                                <% } %>
+                               
+                            </span> 
+                        </p>
+                    <% }); %> 
+                    </div><!--row-->
+                </div>   
+                </div>
+               
+            </div>
+        </div> <!--column div-->
+    </div> <!--row div-->
+</div> <!--container div-->
+
+
+<%- include ("../partials/footer.ejs") %>
